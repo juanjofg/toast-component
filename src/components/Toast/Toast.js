@@ -23,14 +23,14 @@ function Icon({ name }) {
   return <IconName size={24} />;
 }
 
-function Toast({ message, variant }) {
+function Toast({ message, variant, dismiss }) {
   return (
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
         <Icon name={variant} />
       </div>
       <p className={styles.content}>{message}</p>
-      <button className={styles.closeButton}>
+      <button className={styles.closeButton} onClick={dismiss}>
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>

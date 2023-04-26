@@ -10,6 +10,12 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 function ToastPlayground() {
   const [message, setMessage] = React.useState('');
   const [toastVariant, setToastVariant] = React.useState('notice');
+  const [isToastOpen, setIsToastOpen] = React.useState(false);
+
+  function handleDismiss() {
+    setIsToastOpen(false);
+    setMessage('');
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -17,9 +23,13 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-
-      <Toast message={message} variant={toastVariant} />
-
+      {isToastOpen && (
+        <Toast
+          message={message}
+          variant={toastVariant}
+          dismiss={handleDismiss}
+        />
+      )}
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
@@ -63,7 +73,9 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => message && setIsToastOpen(true)}>
+              Pop Toast!
+            </Button>
           </div>
         </div>
       </div>
