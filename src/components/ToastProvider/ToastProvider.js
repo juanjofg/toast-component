@@ -28,11 +28,11 @@ function ToastProvider({ children }) {
     setToastVariant('notice');
   }
 
-  function clearToasts() {
+  const handleEscape = React.useCallback(() => {
     setToasts([]);
-  }
+  }, []);
 
-  useEscapeKey(clearToasts);
+  useEscapeKey(handleEscape);
 
   const value = {
     toasts,
