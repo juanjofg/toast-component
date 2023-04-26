@@ -28,6 +28,22 @@ function ToastProvider({ children }) {
     setToastVariant('notice');
   }
 
+  function clearToasts() {
+    setToasts([]);
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('keydown', (event) => {
+      if (event.code === 'Escape') {
+        clearToasts();
+      }
+    });
+
+    return () => {
+      window.removeEventListener('keydown', clearToasts);
+    };
+  });
+
   const value = {
     toasts,
     setToasts,
